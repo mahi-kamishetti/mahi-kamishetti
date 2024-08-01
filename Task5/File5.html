@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grocery Delivery Application</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Grocery Delivery Application</h1>
+        
+        <div class="product-list">
+            <h2>Available Products</h2>
+            <div class="product" data-name="Apple" data-price="1.00">
+                <h3>Apple</h3>
+                <p>Price: $1.00</p>
+                <button onclick="addToCart('Apple', 1.00)">Add to Cart</button>
+            </div>
+            <div class="product" data-name="Banana" data-price="0.50">
+                <h3>Banana</h3>
+                <p>Price: $0.50</p>
+                <button onclick="addToCart('Banana', 0.50)">Add to Cart</button>
+            </div>
+            <div class="product" data-name="Carrot" data-price="0.30">
+                <h3>Carrot</h3>
+                <p>Price: $0.30</p>
+                <button onclick="addToCart('Carrot', 0.30)">Add to Cart</button>
+            </div>
+        </div>
+        
+        <div class="cart">
+            <h2>Your Cart</h2>
+            <ul id="cartItems"></ul>
+            <p>Total: $<span id="totalPrice">0.00</span></p>
+            <button onclick="checkout()">Checkout</button>
+        </div>
+    </div>
+
+    <script>
+        const cart = [];
+        
+        function addToCart(name, price) {
+            const item = cart.find(item => item.name === name);
+            if (item) {
+                item.quantity++;
+            } else {
+                cart.push({ name, price, quantity: 1 });
+            }
+            updateCart();
+        }
+        
+        function updateCart() {
+            const cartItems = document.getElementById('cartItems');
+            const totalPriceElement = document.getElementById('totalPrice');
+            cartItems.innerHTML = '';
+            let totalPrice = 0;
+            
+            cart.forEach(item => {
+                const listItem = document.createElement('li');
+                listItem.textConte
